@@ -1,0 +1,43 @@
+{
+  "selection_based_on": "validation_oof_only",
+  "test_set_used": false,
+  "num_candidate_models": 17,
+  "min_combo_size": 2,
+  "max_combo_size": 3,
+  "methods_tried": [
+    "soft_voting_uniform",
+    "weighted_soft_voting_global",
+    "weighted_soft_voting_per_class"
+  ],
+  "num_combinations": 816,
+  "num_evaluations": 2448,
+  "best_candidate": {
+    "rank": 1,
+    "ensemble_method": "weighted_soft_voting_global",
+    "combo_size": 3,
+    "combo_models": "resnet18_upsampling_original|dinov2_vit_small_patch14_upsampling_original|dinov2_vit_base_patch14_upsampling_original",
+    "accuracy": 0.9485294117647058,
+    "balanced_accuracy": 0.9410305636705224,
+    "f1_macro": 0.9450498750685076,
+    "log_loss": 0.315076083238211,
+    "expected_calibration_error": 0.04346198811396661,
+    "ensemble_promising_label": "very_promising",
+    "ensemble_recommendation_score": 0.1494695809780416,
+    "delta_accuracy_vs_best_single": 0.009803921568627416,
+    "delta_f1_macro_vs_best_single": 0.010303076064326788,
+    "delta_balanced_accuracy_vs_best_single": 0.010715609336868659,
+    "num_main_metrics_improved_vs_best_single": 7,
+    "num_main_metrics_worsened_vs_best_single": 1
+  },
+  "recommendation": "Usare questa combinazione e questo metodo come candidato principale da valutare poi sul test set finale con ensemble_only.",
+  "files": {
+    "all_combinations_metrics": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble/validation_selection__17models_exhaustive__20260510_070710/validation_exhaustive_all_combinations_metrics.csv",
+    "all_combinations_metrics_enriched": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble/validation_selection__17models_exhaustive__20260510_070710/validation_exhaustive_all_combinations_metrics_enriched.csv",
+    "single_models_metrics": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble/validation_selection__17models_exhaustive__20260510_070710/validation_single_models_metrics.csv",
+    "ranking": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble/validation_selection__17models_exhaustive__20260510_070710/validation_exhaustive_ranking.csv",
+    "promising_combos_vs_best_single": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble/validation_selection__17models_exhaustive__20260510_070710/validation_exhaustive_promising_combos_vs_best_single.csv",
+    "best_method_per_combo_vs_best_single": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble/validation_selection__17models_exhaustive__20260510_070710/validation_exhaustive_best_method_per_combo_vs_best_single.csv",
+    "best_per_size": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble/validation_selection__17models_exhaustive__20260510_070710/validation_exhaustive_best_per_size.csv",
+    "best_per_method": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble/validation_selection__17models_exhaustive__20260510_070710/validation_exhaustive_best_per_method.csv"
+  }
+}

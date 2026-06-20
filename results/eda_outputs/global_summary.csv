@@ -1,0 +1,2 @@
+﻿n_classes,n_total_images,n_corrupted_images,avg_images_per_class,min_images_in_class,max_images_in_class,avg_width,avg_height,min_width,max_width,min_height,max_height,avg_file_size_mb,total_size_gb_estimated
+46,8153,0,177.2391304347826,52,395,1867.7405862872563,2670.714951551576,804,6000,996,6766,4.46189258640476,35.525205329060555

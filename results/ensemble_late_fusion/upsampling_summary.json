@@ -1,0 +1,366 @@
+{
+  "sampling_mode": "upsampling",
+  "dataset_variant": "original",
+  "split_info": {
+    "mode": "upsampling",
+    "train_source": "/content/drive/MyDrive/Dataset Fargetta_224x224/augmented_train_only_original_seed42_test0p1/train_upsampling_manifest.csv",
+    "val_source": "reconstructed_from_seed",
+    "test_source": "reconstructed_from_seed",
+    "final_train_source": "/content/drive/MyDrive/Dataset Fargetta_224x224/augmented_train_only_original_seed42_test0p1/train_upsampling_manifest.csv"
+  },
+  "num_classes": 46,
+  "base_models": [
+    {
+      "alias": "resnet18",
+      "model_name": "resnet18",
+      "checkpoint_path": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/upsampling/resnet18/resnet18_fine_tune_original_upsampling_full_20260507_220729/models/resnet18_fold_fixed.pt"
+    },
+    {
+      "alias": "dinov2_small",
+      "model_name": "dinov2_vit_small_patch14",
+      "checkpoint_path": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/upsampling/dinov2_vit_small_patch14/dinov2_vit_small_patch14_fine_tune_original_upsampling_full_20260506_193719/models/dinov2_vit_small_patch14_fold_fixed.pt"
+    },
+    {
+      "alias": "dinov2_base",
+      "model_name": "dinov2_vit_base_patch14",
+      "checkpoint_path": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/upsampling/dinov2_vit_base_patch14/dinov2_vit_base_patch14_fine_tune_original_upsampling_full_20260506_214738/models/dinov2_vit_base_patch14_fold_fixed.pt"
+    }
+  ],
+  "candidate_combinations": [
+    [
+      "resnet18",
+      "dinov2_small"
+    ],
+    [
+      "resnet18",
+      "dinov2_base"
+    ],
+    [
+      "dinov2_small",
+      "dinov2_base"
+    ],
+    [
+      "resnet18",
+      "dinov2_small",
+      "dinov2_base"
+    ]
+  ],
+  "selection_metric": "accuracy",
+  "files": {
+    "output_dir": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble_late_fusion/ensemble_late_fusion_upsampling__20260617_063215",
+    "validation_all_methods_ranking": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble_late_fusion/ensemble_late_fusion_upsampling__20260617_063215/validation_all_methods_ranking.csv",
+    "selected_combinations_for_test": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble_late_fusion/ensemble_late_fusion_upsampling__20260617_063215/selected_combinations_for_test.csv",
+    "test_final_results": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble_late_fusion/ensemble_late_fusion_upsampling__20260617_063215/test_final_results.csv"
+  },
+  "best_validation": [
+    {
+      "method": "late_fusion_embeddings_mlp",
+      "combo": "resnet18__dinov2_base",
+      "models": [
+        "resnet18",
+        "dinov2_base"
+      ],
+      "weights": null,
+      "class_weights": null,
+      "val_accuracy": 0.9522058823529411,
+      "val_balanced_accuracy": 0.9429451149352629,
+      "val_macro_f1": 0.9479952441168567,
+      "val_expected_calibration_error": 0.027594187457024723,
+      "val_num_samples": 816,
+      "val_log_loss": 0.258540710611381,
+      "val_top3_accuracy": 0.9705882352941176,
+      "val_top5_accuracy": 0.9754901960784313,
+      "input_dim": 1280.0,
+      "classifier_info": "{\"classifier\": \"mlp\", \"best_epoch\": 2, \"best_val_accuracy\": 0.9522058823529411}"
+    },
+    {
+      "method": "late_fusion_embeddings_mlp",
+      "combo": "dinov2_small__dinov2_base",
+      "models": [
+        "dinov2_small",
+        "dinov2_base"
+      ],
+      "weights": null,
+      "class_weights": null,
+      "val_accuracy": 0.9509803921568627,
+      "val_balanced_accuracy": 0.942855276569236,
+      "val_macro_f1": 0.9460327219522005,
+      "val_expected_calibration_error": 0.02228396392887984,
+      "val_num_samples": 816,
+      "val_log_loss": 0.2538322428624726,
+      "val_top3_accuracy": 0.9718137254901961,
+      "val_top5_accuracy": 0.9803921568627451,
+      "input_dim": 1152.0,
+      "classifier_info": "{\"classifier\": \"mlp\", \"best_epoch\": 1, \"best_val_accuracy\": 0.9509803921568627}"
+    },
+    {
+      "method": "weighted_soft_voting_per_class",
+      "combo": "resnet18__dinov2_small__dinov2_base",
+      "models": [
+        "resnet18",
+        "dinov2_small",
+        "dinov2_base"
+      ],
+      "weights": null,
+      "class_weights": "[[0.3333333333333333, 0.27279661478669887, 0.3333333333333333, 0.31252243674788116, 0.3448145214066752, 0.3170898104380878, 0.3265376852663554, 0.34090083545223393, 0.31580746076395283, 0.31580746076395283, 0.34614005430049694, 0.3361316319677636, 0.3333333333333333, 0.28577136008218706, 0.3399932069289325, 0.33333333333333337, 0.3333333333333333, 0.2224070992789795, 0.3333333333333333, 0.3170898104380878, 0.34041829620812786, 0.34781097984711606, 0.32954958227388303, 0.3333333333333333, 0.29172647652333106, 0.29037247067921124, 0.3265381008684307, 0.33870396030032546, 0.30772579447389314, 0.29791529421765095, 0.3077198913990062, 0.31709099768546717, 0.32259311766980286, 0.28211432083589427, 0.3333333333333333, 0.31252243674788116, 0.2703519758151587, 0.2903703942386699, 0.2813133992946097, 0.27034687542178426, 0.28952556183466943, 0.31430854403287484, 0.3143052859915516, 0.27506991610067916, 0.3000499251123315, 0.30955268602411357], [0.3333333333333333, 0.36360169260665054, 0.3333333333333333, 0.3437387816260594, 0.3103709571866497, 0.3414550947809561, 0.3469246294672891, 0.31819832909553214, 0.3420962696180236, 0.3420962696180236, 0.33333333333333337, 0.32773673606447284, 0.3333333333333333, 0.34284572798356255, 0.32001358614213504, 0.33333333333333337, 0.32185095877827535, 0.44425956738768724, 0.3333333333333333, 0.3414550947809561, 0.3191634075837443, 0.326094510076442, 0.31819832909553214, 0.3333333333333333, 0.3749401901433356, 0.32259311766980286, 0.3265381008684307, 0.33870396030032546, 0.3333333333333333, 0.3616677646258793, 0.33333333333333337, 0.31709099768546717, 0.3548137646603944, 0.38455234583077236, 0.3333333333333333, 0.3437387816260594, 0.35132800690995464, 0.3548148028806651, 0.3125253597178439, 0.35132946416520444, 0.3420948876330661, 0.34284572798356255, 0.34284735700422425, 0.3499800239712345, 0.3000499251123315, 0.33333333333333337], [0.3333333333333333, 0.36360169260665054, 0.3333333333333333, 0.3437387816260594, 0.3448145214066752, 0.3414550947809561, 0.3265376852663554, 0.34090083545223393, 0.3420962696180236, 0.3420962696180236, 0.3205266123661698, 0.3361316319677636, 0.3333333333333333, 0.3713829119342503, 0.3399932069289325, 0.33333333333333337, 0.3448157078883913, 0.3333333333333333, 0.3333333333333333, 0.3414550947809561, 0.34041829620812786, 0.326094510076442, 0.3522520886305848, 0.3333333333333333, 0.3333333333333333, 0.38703441165098595, 0.3469237982631386, 0.32259207939934903, 0.35894087219277354, 0.3404169411564698, 0.35894677526766045, 0.3658180046290656, 0.32259311766980286, 0.3333333333333333, 0.3333333333333333, 0.3437387816260594, 0.3783200172748866, 0.3548148028806651, 0.4061612409875464, 0.3783236604130112, 0.36837955053226445, 0.34284572798356255, 0.34284735700422425, 0.3749500599280863, 0.399900149775337, 0.3571139806425531]]",
+      "val_accuracy": 0.9485294117647058,
+      "val_balanced_accuracy": 0.9410305636705224,
+      "val_macro_f1": 0.9447643208131992,
+      "val_expected_calibration_error": 0.04296998131775638,
+      "val_num_samples": 816,
+      "val_log_loss": 0.3126108911037993,
+      "val_top3_accuracy": 0.9718137254901961,
+      "val_top5_accuracy": 0.9742647058823529,
+      "input_dim": null,
+      "classifier_info": null
+    },
+    {
+      "method": "late_fusion_embeddings_mlp",
+      "combo": "resnet18__dinov2_small__dinov2_base",
+      "models": [
+        "resnet18",
+        "dinov2_small",
+        "dinov2_base"
+      ],
+      "weights": null,
+      "class_weights": null,
+      "val_accuracy": 0.9473039215686274,
+      "val_balanced_accuracy": 0.9394471816627827,
+      "val_macro_f1": 0.9423124638269748,
+      "val_expected_calibration_error": 0.025432263584175142,
+      "val_num_samples": 816,
+      "val_log_loss": 0.26557444288964,
+      "val_top3_accuracy": 0.9730392156862745,
+      "val_top5_accuracy": 0.9767156862745098,
+      "input_dim": 1664.0,
+      "classifier_info": "{\"classifier\": \"mlp\", \"best_epoch\": 3, \"best_val_accuracy\": 0.9473039215686274}"
+    },
+    {
+      "method": "weighted_soft_voting_global",
+      "combo": "resnet18__dinov2_small__dinov2_base",
+      "models": [
+        "resnet18",
+        "dinov2_small",
+        "dinov2_base"
+      ],
+      "weights": "[0.2, 0.4, 0.4]",
+      "class_weights": null,
+      "val_accuracy": 0.9473039215686274,
+      "val_balanced_accuracy": 0.936682737583566,
+      "val_macro_f1": 0.9409478956924262,
+      "val_expected_calibration_error": 0.02827755421258476,
+      "val_num_samples": 816,
+      "val_log_loss": 0.3026692336699297,
+      "val_top3_accuracy": 0.9705882352941176,
+      "val_top5_accuracy": 0.9742647058823529,
+      "input_dim": null,
+      "classifier_info": null
+    },
+    {
+      "method": "soft_voting_uniform",
+      "combo": "resnet18__dinov2_small__dinov2_base",
+      "models": [
+        "resnet18",
+        "dinov2_small",
+        "dinov2_base"
+      ],
+      "weights": "[0.3333333333333333, 0.3333333333333333, 0.3333333333333333]",
+      "class_weights": null,
+      "val_accuracy": 0.946078431372549,
+      "val_balanced_accuracy": 0.9350104967808904,
+      "val_macro_f1": 0.939286241033195,
+      "val_expected_calibration_error": 0.04311074911963073,
+      "val_num_samples": 816,
+      "val_log_loss": 0.3172744291989813,
+      "val_top3_accuracy": 0.9718137254901961,
+      "val_top5_accuracy": 0.9742647058823529,
+      "input_dim": null,
+      "classifier_info": null
+    },
+    {
+      "method": "weighted_soft_voting_global",
+      "combo": "dinov2_small__dinov2_base",
+      "models": [
+        "dinov2_small",
+        "dinov2_base"
+      ],
+      "weights": "[0.4, 0.6]",
+      "class_weights": null,
+      "val_accuracy": 0.9436274509803921,
+      "val_balanced_accuracy": 0.9335729446753479,
+      "val_macro_f1": 0.9395511999765833,
+      "val_expected_calibration_error": 0.02774817608183807,
+      "val_num_samples": 816,
+      "val_log_loss": 0.3217456821822833,
+      "val_top3_accuracy": 0.9718137254901961,
+      "val_top5_accuracy": 0.9767156862745098,
+      "input_dim": null,
+      "classifier_info": null
+    },
+    {
+      "method": "weighted_soft_voting_per_class",
+      "combo": "dinov2_small__dinov2_base",
+      "models": [
+        "dinov2_small",
+        "dinov2_base"
+      ],
+      "weights": null,
+      "class_weights": "[[0.5, 0.5, 0.5, 0.5, 0.4737146461991379, 0.5, 0.5151359205666888, 0.48277762468999724, 0.5, 0.5, 0.5097931682858039, 0.4936772888214467, 0.5, 0.48002237494006705, 0.4848640794333111, 0.5, 0.482776438167413, 0.5713266761768901, 0.5, 0.5, 0.4838875998968807, 0.5, 0.4746038195855343, 0.5, 0.5293720260823591, 0.4545949872865965, 0.4848649957621988, 0.5121820485332814, 0.4815047717688836, 0.5151340880198559, 0.48150066597602487, 0.4643239386371745, 0.5237823439878234, 0.5356735159817352, 0.5, 0.5, 0.4815034033737792, 0.5, 0.43485624945713547, 0.48150203477617465, 0.48150203477617465, 0.5, 0.5, 0.48277762468999724, 0.4286733238231098, 0.48277881104911485], [0.5, 0.5, 0.5, 0.5, 0.5262853538008622, 0.5, 0.4848640794333111, 0.5172223753100027, 0.5, 0.5, 0.4902068317141962, 0.5063227111785533, 0.5, 0.5199776250599328, 0.5151359205666888, 0.5, 0.5172235618325869, 0.4286733238231098, 0.5, 0.5, 0.5161124001031193, 0.5, 0.5253961804144657, 0.5, 0.4706279739176408, 0.5454050127134035, 0.5151350042378012, 0.48781795146671864, 0.5184952282311164, 0.4848659119801441, 0.5184993340239751, 0.5356760613628255, 0.4762176560121766, 0.4643264840182648, 0.5, 0.5, 0.5184965966262208, 0.5, 0.5651437505428646, 0.5184979652238254, 0.5184979652238254, 0.5, 0.5, 0.5172223753100027, 0.5713266761768901, 0.5172211889508852]]",
+      "val_accuracy": 0.9424019607843137,
+      "val_balanced_accuracy": 0.9356380031548801,
+      "val_macro_f1": 0.9400823092825847,
+      "val_expected_calibration_error": 0.0376375579241704,
+      "val_num_samples": 816,
+      "val_log_loss": 0.3247777842378949,
+      "val_top3_accuracy": 0.9718137254901961,
+      "val_top5_accuracy": 0.9779411764705882,
+      "input_dim": null,
+      "classifier_info": null
+    },
+    {
+      "method": "weighted_soft_voting_per_class",
+      "combo": "resnet18__dinov2_base",
+      "models": [
+        "resnet18",
+        "dinov2_base"
+      ],
+      "weights": null,
+      "class_weights": "[[0.5, 0.42865704012328065, 0.5, 0.4762165247585977, 0.5, 0.48150066597602487, 0.5, 0.5, 0.4800207783904739, 0.4800207783904739, 0.5192100814507453, 0.5, 0.5, 0.4348619072433559, 0.5, 0.5, 0.49153403318658995, 0.4001996007984032, 0.5, 0.48150066597602487, 0.5, 0.5161124001031193, 0.48335109216835376, 0.5, 0.46671769952739134, 0.42865296803652975, 0.4848649957621988, 0.5121820485332814, 0.46158869171083966, 0.466708835475065, 0.4615798370985093, 0.4643239386371745, 0.5, 0.45838881491344874, 0.5, 0.4762165247585977, 0.4167776298268975, 0.45005743395095643, 0.4091982202851176, 0.4167707032875572, 0.4400719137035557, 0.478287302414452, 0.47828353022932596, 0.4231714812538414, 0.4286733238231098, 0.46432902903617035], [0.5, 0.5713429598767193, 0.5, 0.5237834752414023, 0.5, 0.5184993340239751, 0.5, 0.5, 0.519979221609526, 0.519979221609526, 0.4807899185492547, 0.5, 0.5, 0.5651380927566441, 0.5, 0.5, 0.50846596681341, 0.5998003992015968, 0.5, 0.5184993340239751, 0.5, 0.4838875998968807, 0.5166489078316463, 0.5, 0.5332823004726086, 0.5713470319634704, 0.5151350042378012, 0.48781795146671864, 0.5384113082891603, 0.5332911645249351, 0.5384201629014906, 0.5356760613628255, 0.5, 0.5416111850865513, 0.5, 0.5237834752414023, 0.5832223701731025, 0.5499425660490437, 0.5908017797148823, 0.5832292967124428, 0.5599280862964443, 0.5217126975855481, 0.5217164697706741, 0.5768285187461586, 0.5713266761768901, 0.5356709709638297]]",
+      "val_accuracy": 0.9411764705882353,
+      "val_balanced_accuracy": 0.9325108260947428,
+      "val_macro_f1": 0.9378597896371648,
+      "val_expected_calibration_error": 0.046868664802339415,
+      "val_num_samples": 816,
+      "val_log_loss": 0.34013138889442235,
+      "val_top3_accuracy": 0.9705882352941176,
+      "val_top5_accuracy": 0.9730392156862745,
+      "input_dim": null,
+      "classifier_info": null
+    },
+    {
+      "method": "soft_voting_uniform",
+      "combo": "dinov2_small__dinov2_base",
+      "models": [
+        "dinov2_small",
+        "dinov2_base"
+      ],
+      "weights": "[0.5, 0.5]",
+      "class_weights": null,
+      "val_accuracy": 0.9399509803921569,
+      "val_balanced_accuracy": 0.9313101299411374,
+      "val_macro_f1": 0.9357858391342772,
+      "val_expected_calibration_error": 0.037946588406882566,
+      "val_num_samples": 816,
+      "val_log_loss": 0.3260701498681986,
+      "val_top3_accuracy": 0.9718137254901961,
+      "val_top5_accuracy": 0.9779411764705882,
+      "input_dim": null,
+      "classifier_info": null
+    }
+  ],
+  "test_results": [
+    {
+      "method": "late_fusion_embeddings_mlp",
+      "combo": "resnet18__dinov2_base",
+      "models": [
+        "resnet18",
+        "dinov2_base"
+      ],
+      "val_accuracy": 0.9522058823529411,
+      "val_balanced_accuracy": 0.9429451149352629,
+      "val_macro_f1": 0.9479952441168567,
+      "val_expected_calibration_error": 0.027594187457024723,
+      "val_num_samples": 816,
+      "val_log_loss": 0.258540710611381,
+      "val_top3_accuracy": 0.9705882352941176,
+      "val_top5_accuracy": 0.9754901960784313,
+      "test_accuracy": 0.9227941176470589,
+      "test_balanced_accuracy": 0.915292184489078,
+      "test_macro_f1": 0.9157724775294601,
+      "test_expected_calibration_error": 0.008074877324805448,
+      "test_num_samples": 816,
+      "test_log_loss": 0.3091133715013259,
+      "test_top3_accuracy": 0.9681372549019608,
+      "test_top5_accuracy": 0.9718137254901961,
+      "test_predictions_path": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble_late_fusion/ensemble_late_fusion_upsampling__20260617_063215/test_predictions__late_fusion_embeddings_mlp__resnet18__dinov2_base.csv"
+    },
+    {
+      "method": "weighted_soft_voting_global",
+      "combo": "resnet18__dinov2_small__dinov2_base",
+      "models": [
+        "resnet18",
+        "dinov2_small",
+        "dinov2_base"
+      ],
+      "val_accuracy": 0.9473039215686274,
+      "val_balanced_accuracy": 0.936682737583566,
+      "val_macro_f1": 0.9409478956924262,
+      "val_expected_calibration_error": 0.02827755421258476,
+      "val_num_samples": 816,
+      "val_log_loss": 0.3026692336699297,
+      "val_top3_accuracy": 0.9705882352941176,
+      "val_top5_accuracy": 0.9742647058823529,
+      "test_accuracy": 0.9227941176470589,
+      "test_balanced_accuracy": 0.9117251581063894,
+      "test_macro_f1": 0.9156085623604272,
+      "test_expected_calibration_error": 0.012528498411040038,
+      "test_num_samples": 816,
+      "test_log_loss": 0.3226838662031432,
+      "test_top3_accuracy": 0.9620098039215687,
+      "test_top5_accuracy": 0.9779411764705882,
+      "test_predictions_path": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble_late_fusion/ensemble_late_fusion_upsampling__20260617_063215/test_predictions__weighted_soft_voting_global__resnet18__dinov2_small__dinov2_base.csv"
+    },
+    {
+      "method": "weighted_soft_voting_per_class",
+      "combo": "resnet18__dinov2_small__dinov2_base",
+      "models": [
+        "resnet18",
+        "dinov2_small",
+        "dinov2_base"
+      ],
+      "val_accuracy": 0.9485294117647058,
+      "val_balanced_accuracy": 0.9410305636705224,
+      "val_macro_f1": 0.9447643208131992,
+      "val_expected_calibration_error": 0.04296998131775638,
+      "val_num_samples": 816,
+      "val_log_loss": 0.3126108911037993,
+      "val_top3_accuracy": 0.9718137254901961,
+      "val_top5_accuracy": 0.9742647058823529,
+      "test_accuracy": 0.9203431372549019,
+      "test_balanced_accuracy": 0.9115927723761778,
+      "test_macro_f1": 0.915744789944674,
+      "test_expected_calibration_error": 0.03816366140819203,
+      "test_num_samples": 816,
+      "test_log_loss": 0.332683783986907,
+      "test_top3_accuracy": 0.9620098039215687,
+      "test_top5_accuracy": 0.9767156862745098,
+      "test_predictions_path": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble_late_fusion/ensemble_late_fusion_upsampling__20260617_063215/test_predictions__weighted_soft_voting_per_class__resnet18__dinov2_small__dinov2_base.csv"
+    },
+    {
+      "method": "soft_voting_uniform",
+      "combo": "resnet18__dinov2_small__dinov2_base",
+      "models": [
+        "resnet18",
+        "dinov2_small",
+        "dinov2_base"
+      ],
+      "val_accuracy": 0.946078431372549,
+      "val_balanced_accuracy": 0.9350104967808904,
+      "val_macro_f1": 0.939286241033195,
+      "val_expected_calibration_error": 0.04311074911963073,
+      "val_num_samples": 816,
+      "val_log_loss": 0.3172744291989813,
+      "val_top3_accuracy": 0.9718137254901961,
+      "val_top5_accuracy": 0.9742647058823529,
+      "test_accuracy": 0.9191176470588235,
+      "test_balanced_accuracy": 0.9102440305383053,
+      "test_macro_f1": 0.9148811553331031,
+      "test_expected_calibration_error": 0.038037535772500485,
+      "test_num_samples": 816,
+      "test_log_loss": 0.33527108602008776,
+      "test_top3_accuracy": 0.9607843137254902,
+      "test_top5_accuracy": 0.9767156862745098,
+      "test_predictions_path": "/content/drive/MyDrive/Dataset Fargetta_224x224/results/ensemble_late_fusion/ensemble_late_fusion_upsampling__20260617_063215/test_predictions__soft_voting_uniform__resnet18__dinov2_small__dinov2_base.csv"
+    }
+  ]
+}
